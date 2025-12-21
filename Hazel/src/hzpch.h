@@ -1,5 +1,6 @@
 #pragma once
 #define GLFW_STATIC
+
 #include <iostream>
 #include <functional>
 #include <memory>
@@ -10,7 +11,6 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <sstream>
-
 #include "Hazel/Log.h"
 
 #ifdef HZ_PLATFORM_WINDOWS
