@@ -1,5 +1,6 @@
 #pragma once
 #include "Hazel/Core.h"
+#include "Hazel/Core/TimeStep.h"
 #include "Hazel/Events/Event.h"
 
 namespace Hazel
@@ -12,7 +13,7 @@ namespace Hazel
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(TimeStep timestep) {}
 		virtual void OnEvent(Event& event) {}
 		virtual void OnImGuiRender(){}
 

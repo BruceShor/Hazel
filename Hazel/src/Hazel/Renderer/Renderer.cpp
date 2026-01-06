@@ -1,6 +1,26 @@
-#include"hzpch.h"
+#include "hzpch.h"
 #include "Renderer.h"
-
+#include "Platform/OpenGL/OpenGLShader.h"
 namespace Hazel {
-	RendererAPI Renderer::s_RendererAPI = RendererAPI::OpenGL;
+	Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
+
+	void Renderer::BeginScene(OrthographicCamera& camera)
+	{
+		m_SceneData->ViewprojectionMatrix = camera.GetViewProjectionMatrix();
+	}
+
+	void Renderer::EndScene()
+	{
+
+	}
+
+	void Renderer::Submit(const Hazel::Ref<Shader>& shader, const Hazel::Ref<VertexArray>& vertexArray, const glm::mat4& transform)
+	{
+		shader->Bind();
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", m_SceneData->ViewprojectionMatrix);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+
+		vertexArray->Bind();
+		RenderCommand::DrawIndexed(vertexArray);
+	}
 }

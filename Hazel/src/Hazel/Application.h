@@ -4,10 +4,8 @@
 #include "Hazel/Events/ApplicationEvent.h"
 #include "Window.h"
 #include "Hazel/LayerStack.h"
-#include "Hazel/ImGui/ImGuiLayer.h"
-#include "Hazel/Renderer/Shader.h"
-#include "Hazel/Renderer/Buffer.h"
-#include "Hazel/Renderer/VertexArray.h"
+#include "Hazel/ImGui/ImGuiLayer.h"	
+#include "Hazel/Core/TimeStep.h"
 
 namespace Hazel {
 
@@ -34,14 +32,7 @@ namespace Hazel {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
-		std::shared_ptr<Shader> m_Shader;
-
-		std::shared_ptr<Shader> m_BlueShader;
-
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<VertexArray> m_SquareVA;
+		float m_LastFrameTime = 0;
 	private:
 		static Application* s_Instance;
 	};

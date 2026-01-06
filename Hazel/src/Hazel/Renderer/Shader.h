@@ -1,18 +1,21 @@
 #pragma once
 #include <string>
+#include <glm/glm.hpp>
+#include <sstream>
+#include <fstream>
 
 namespace Hazel {
 
 	class Shader
 	{
 	public:
-		Shader(const std::string& vertexSrc, const std::string& fragmentSrc);
-		~Shader();
+		virtual ~Shader() = default;
 
-		void Bind() const;
-		void UnBind() const;
+		virtual void Bind() const = 0;
+		virtual void UnBind() const = 0;
 
-	private:
-		uint32_t m_RendererID;
+		static Shader* Create(const std::string& vertexSrc, const std::string& fragmentSrc);
 	};
+
+	using ShaderRef = Ref<Shader>;
 }
